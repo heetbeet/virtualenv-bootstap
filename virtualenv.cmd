@@ -3,7 +3,7 @@
     setlocal
 
     set "_cmd=%~f0"
-    set "_arg1=%~1"
+    set _arg1=%1
     set _args=%*
 
     powershell -nologo -nop -exec bypass "iex (Get-Content '%_cmd%' -Raw)"
@@ -11,7 +11,7 @@
 #>
 
 # Retrieve the value from the environment variable
-$version = $env:_arg1
+$version = $env:_arg1 -replace '"', ''
 $pattern = '^3\.\d+\.\d+$'
 
 $url = "https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip"
@@ -73,10 +73,10 @@ if ($pythonExists -and $virtualenvExists -and $pipExists) {
 }
 
 
-$argstring = $env:_args 
+$argstring = $env:_args
 if ($version -match $pattern) {
-    $argstring = $argstring.Substring($version.Length + 1)
+    $argstring = $argstring.Substring(($env:_arg1).Length)
 }
 
 # Run virtualenv with the collected args
-& cmd /c "`"$pythonExePath`" -m virtualenv $env:_args"
+& cmd /c "`"$pythonExePath`" -m virtualenv $argstring"
