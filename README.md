@@ -7,7 +7,7 @@ Navigate in _Cmd_ to a location where you want to create a `venv` directory, and
 
     powershell -nop -c "Invoke-WebRequest -Uri 'https://github.com/heetbeet/virtualenv-bootstap/raw/main/virtualenv.cmd' -OutFile $env:Temp/virtualenv.cmd; & $env:Temp/virtualenv.cmd venv"
 
-To run something else, you can replace the terminating `venv` argument with any arguments, such as `--help`
+To run other `virtualenv.cmd` commands, you can replace the terminating `venv` argument with other arguments, such as `--help`
 
     powershell -nop -c "Invoke-WebRequest -Uri 'https://github.com/heetbeet/virtualenv-bootstap/raw/main/virtualenv.cmd' -OutFile $env:Temp/virtualenv.cmd; & $env:Temp/virtualenv.cmd --help"
 <br>
