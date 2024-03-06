@@ -2,6 +2,13 @@
 
 This script, `virtualenv.cmd`, is designed for Windows users who need to create Python virtual environments without installing Python globally on their system. It acts as a shim to bootstrap an underlying Python binary, allowing you to specify the Python version and set up a virtual environment with ease.
 
+# Quick usage
+Navigate in _Cmd_ to a location where you want to create a venv directory, and run:
+
+    powershell -nop -c "Invoke-WebRequest -Uri 'https://github.com/heetbeet/virtualenv-bootstap/raw/main/virtualenv.cmd' -OutFile $env:Temp/virtualenv.cmd; & $env:Temp/virtualenv.cmd venv"
+<br>
+
+
 ## Features
 
 - **Python Version Specification:** Allows specifying a Python version (3.x.x format) to bootstrap the virtual environment with that specific Python version.
