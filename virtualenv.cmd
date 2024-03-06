@@ -4,14 +4,7 @@
 
     set "_cmd=%~f0"
     set "_arg1=%~1"
-    set "_arg2=%~2"
-    set "_arg3=%~3"
-    set "_arg4=%~4"
-    set "_arg5=%~5"
-    set "_arg6=%~6"
-    set "_arg7=%~7"
-    set "_arg8=%~8"
-    set "_arg9=%~9"
+    set _args=%*
 
     powershell -nologo -nop -exec bypass "iex (Get-Content '%_cmd%' -Raw)"
     goto :EOF
@@ -79,17 +72,11 @@ if ($pythonExists -and $virtualenvExists -and $pipExists) {
     & $pythonExePath -m pip install virtualenv -q --no-warn-script-location
 }
 
-# Create an array from the cmd arguments, bypass the version arg, and pop the empty ones
-# Cannot find a good way to transfer the args from cmd to powershell
+
+$argstring = $env:_args 
 if ($version -match $pattern) {
-	$argArray = @("$env:_arg2", "$env:_arg3", "$env:_arg4", "$env:_arg5", "$env:_arg6", "$env:_arg7", "$env:_arg8", "$env:_arg9")
-} else {
-	$argArray = @("$env:_arg1", "$env:_arg2", "$env:_arg3", "$env:_arg4", "$env:_arg5", "$env:_arg6", "$env:_arg7", "$env:_arg8", "$env:_arg9")
-}
-while ($argArray.Count -gt 0 -and $argArray[-1] -eq "") {
-    if ($argArray.Count - 1 -eq 0) { $argArray = @() }
-    else { $argArray = $argArray[0..($argArray.Count - 2)] }
+    $argstring = $argstring.Substring($version.Length + 1)
 }
 
 # Run virtualenv with the collected args
-& $pythonExePath -m virtualenv @argArray
+& cmd /c "`"$pythonExePath`" -m virtualenv $env:_args"
