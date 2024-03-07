@@ -7,7 +7,7 @@ Navigate in _Cmd_ to a location where you want to create a `venv` directory, and
 
     powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd)$env:temp/.cmd venv
 
-To run any `virtualenv` command, you can replace the terminating `venv` argument with arguments of your choice, e.g. `--help`
+To run any `virtualenv` command, just replace the argument `venv` with arguments of your choice, e.g. `--help`
 
     powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd)$env:temp/.cmd --help
 
