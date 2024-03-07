@@ -1,4 +1,4 @@
-# Virtualenv Bootstrap for Windows
+# Virtualenv Bootstrapper for Windows
 
 This script, `virtualenv.cmd`, is designed for Windows users who need to create Python virtual environments without installing Python globally on their system. It acts as a shim to bootstrap an underlying Python binary, allowing you to specify the Python version and set up a virtual environment with ease. You can even access the script directly from your terminal.
 
