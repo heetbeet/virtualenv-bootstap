@@ -23,7 +23,7 @@ To run any `virtualenv` command, just replace the argument `venv` with arguments
 
 1. **Download the Script:** Download `virtualenv.cmd` to your project directory or a known location on your system.
 
-2. **Make Accessible Everywhere:** Optionally, add the script's directory to your system's PATH by running add-directory-to-user-path.cmd. This lets you use virtualenv.cmd from any command prompt without navigating to its folder.
+2. **Make Accessible Everywhere:** Optionally, add the script's directory to your system's PATH by running `add-directory-to-user-path.cmd`. This lets you use `virtualenv.cmd` from any command prompt without navigating to its folder.
 
 3. **Open Command Prompt:** Navigate to the directory where you've placed `virtualenv.cmd` if it's not in your PATH.
 
