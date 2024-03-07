@@ -5,11 +5,11 @@ This script, `virtualenv.cmd`, is designed for Windows users who need to create 
 # Quick usage
 Navigate in _Cmd_ to a location where you want to create a `venv` directory, and run:
 
-    powershell -nop -c "Invoke-WebRequest -Uri 'https://github.com/heetbeet/virtualenv-bootstap/raw/main/virtualenv.cmd' -OutFile $env:Temp/virtualenv.cmd; & $env:Temp/virtualenv.cmd venv"
+    powershell -nop -c "Invoke-WebRequest -Uri 'https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd' -OutFile $env:Temp/virtualenv.cmd; & $env:Temp/virtualenv.cmd venv"
 
 To run other `virtualenv.cmd` commands, you can replace the terminating `venv` argument with other arguments, such as `--help`
 
-    powershell -nop -c "Invoke-WebRequest -Uri 'https://github.com/heetbeet/virtualenv-bootstap/raw/main/virtualenv.cmd' -OutFile $env:Temp/virtualenv.cmd; & $env:Temp/virtualenv.cmd --help"
+    powershell -nop -c "Invoke-WebRequest -Uri 'https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd' -OutFile $env:Temp/virtualenv.cmd; & $env:Temp/virtualenv.cmd --help"
 <br>
 
 ## Features
