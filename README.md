@@ -5,11 +5,11 @@ This script, `virtualenv.cmd`, is designed for Windows users who need to create 
 # Quick usage
 Navigate in _Cmd_ to a location where you want to create a `venv` directory, and run:
 
-    powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd)$env:temp/.cmd venv
+    powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd) $env:temp/.cmd venv
 
 To run any `virtualenv` command, just replace the argument `venv` with arguments of your choice, e.g. `--help`
 
-    powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd)$env:temp/.cmd --help
+    powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd) $env:temp/.cmd --help
 
 <br>
 
