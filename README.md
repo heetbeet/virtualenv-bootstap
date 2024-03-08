@@ -1,8 +1,8 @@
 # Virtualenv Bootstrapper for Windows
 
-A thin stand-alone layer to execute [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) without having to installing Python.
+This is a thin stand-alone layer to execute [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) without having to installing Python. It's written in Powershell and executed through a cmd wrapper.
 
-The script, `virtualenv.cmd`, acts as a shim to bootstrap [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) in order to set up Python virtual environments with any specified Python version, without installing Python directly on your system. You can download `virtualenv.cmd`, you can install `virtualenv.cmd`, or you can even execute `virtualenv.cmd` directly from github.com in your terminal.
+The script, `virtualenv.cmd`, acts as a [shim](https://en.wikipedia.org/wiki/Shim_(computing)) to bootstrap [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) in order to set up Python virtual environments with any specified Python version, without installing Python directly on your system. You can download `virtualenv.cmd`, you can install `virtualenv.cmd`, or you can even execute `virtualenv.cmd` directly from github.com in your terminal.
 
 ## Install virtualenv.cmd
 The easiest way to start using `virtualenv.cmd` is to run the setup script directly from github.com. Open _cmd_ and run the following command:
