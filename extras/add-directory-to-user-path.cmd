@@ -24,5 +24,5 @@ function Add-ToUserPath {
 }
 
 
-Add-ToUserPath "$env:_cmd/.."
+Add-ToUserPath "$env:_cmd/../.."
 

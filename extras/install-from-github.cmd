@@ -5,7 +5,7 @@
     goto :EOF
 #>
 
-function Remove-FromUserPath {
+function Add-ToUserPath {
     param (
         [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
@@ -15,13 +15,14 @@ function Remove-FromUserPath {
 
     $dir = [io.path]::GetFullPath($dir)
     $path = [Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::User)
-    if (";$path;".Contains(";$dir;")) {
-        $path=((";$path;").replace(";$dir;", ";")).Trim(';')
-        [Environment]::SetEnvironmentVariable("PATH", $path, [EnvironmentVariableTarget]::User)
-		Write-Host "Removed $dir from PATH"
-        return
-    }
-    Write-Host "$dir is not in PATH"
+	
+	$path=((";$path;").replace(";$dir;", ";")).Trim(';')
+	$path = "$dir;$path"
+	
+    [Environment]::SetEnvironmentVariable("PATH", "$path", [EnvironmentVariableTarget]::User)
+	Write-Host "Added $dir to PATH"
 }
 
-Remove-FromUserPath "$env:_cmd/.."
+
+Add-ToUserPath "$env:_cmd/../.."
+
