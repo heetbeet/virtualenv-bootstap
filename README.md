@@ -2,12 +2,12 @@
 
 This script, `virtualenv.cmd`, is designed for Windows users who need to create Python virtual environments without installing Python globally on their system. It acts as a shim to bootstrap an underlying Python binary, allowing you  set up a virtual environment and specifying a Python version without commiting to installing Python on your system. You can even execute the script directly from github.com from your terminal.
 
-# Quick usage
-Navigate in _Cmd_ to a location where you want to create a `venv` directory, and run:
+# One-time use
+You can directly execute `virtualenv` from github.com. To create a `venv` directory, just open _cmd_, navigate to a location where you want the `venv` directory, and run:
 
     powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd) $env:temp/.cmd venv
 
-To run any `virtualenv` command, just replace the argument `venv` with arguments of your choice, e.g. `--help`
+Furthermore, to run any `virtualenv` command, just replace the argument `venv` with arguments of your choice, e.g. `--help`
 
     powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd) $env:temp/.cmd --help
 
