@@ -12,7 +12,7 @@ The easiest way to start using `virtualenv.cmd` is to run the setup script direc
 ![image](https://github.com/heetbeet/virtualenv-bootstrap/assets/4103775/1ad3be85-3458-40af-95b3-fad900cd6a0f)
 
 
-## Or run directly from github.com
+## Run directly from github.com
 You can directly execute `virtualenv.cmd` from github.com. For example to create a new `venv` directory, just open _cmd_, navigate to the location where you want the `venv`, and run:
 
     powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd) $env:temp/.cmd venv
@@ -36,7 +36,7 @@ You can have a project with very complex build logic implemented in Python, that
 ## Usage
 
 4. **Running virtualenv:**
-   - To create a virtual environment with the default Python version, simply run virtualenv with regular arguments (see [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html)):
+   - To create a virtual environment with the default Python version, simply run `virtualenv.cmd` with regular arguments (see [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html)):
      ```
      virtualenv [ARGS]
      ```
