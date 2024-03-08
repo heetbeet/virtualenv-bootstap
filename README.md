@@ -23,7 +23,11 @@ Furthermore, to run any `virtualenv.cmd` command, just replace `venv` with the a
 
 <br>
 
-## Added Features
+## Purpose
+The main driver behind `virtualenv.cmd` is to allow projects to have Python as a build dependency, without having to set up Python explicitely.
+You can have a project with very complex build logic implemented in Python, that can now have a simple entry point like `build.cmd`.
+
+## Features
 
 - **Python Version Specification:** `virtualenv.cmd` added an extra argument to [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) in order to specify a Python version for your virtual environment.
 - **No Global Python Installation Required:** Enables the creation of Python virtual environments on Windows machines without the need for a globally installed Python.
