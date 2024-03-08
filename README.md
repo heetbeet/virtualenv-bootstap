@@ -1,6 +1,11 @@
 # Virtualenv Bootstrapper for Windows
 
-This script, `virtualenv.cmd`, is designed for Windows users who need to create Python virtual environments without installing Python globally on their system. It acts as a shim to bootstrap an underlying Python binary, allowing you  set up a virtual environment and specifying a Python version without commiting to installing Python on your system. You can even execute the script directly from github.com from your terminal.
+A thin stand-alone layer to execute [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) without having to installing Python.
+
+The script, `virtualenv.cmd`, acts as a shim to bootstrap [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) in order to set up Python virtual environments with any specified Python version, without installing Python directly on your system. You can download `virtualenv.cmd`, you can install `virtualenv.cmd`, or you can even execute `virtualenv.cmd` directly from github.com in your terminal.
+
+# Installation
+
 
 # One-time use
 You can directly execute `virtualenv` from github.com. To create a `venv` directory, just open _cmd_, navigate to a location where you want the `venv` directory, and run:
@@ -21,14 +26,8 @@ Furthermore, to run any `virtualenv` command, just replace the argument `venv` w
 
 ## Usage
 
-1. **Download the Script:** Download `virtualenv.cmd` to your project directory or a known location on your system.
-
-2. **Make Accessible Everywhere:** Optionally, add the script's directory to your system's PATH by running `extras/add-directory-to-user-path.cmd`. This lets you use `virtualenv.cmd` from any command prompt without navigating to its folder.
-
-3. **Open Command Prompt:** Navigate to the directory where you've placed `virtualenv.cmd` if it's not in your PATH.
-
-4. **Run the Script:**
-   - To create a virtual environment with the default Python version, simply run:
+4. **Running virtualenv:**
+   - To create a virtual environment with the default Python version, simply run virtualenv with regular arguments (see :
      ```
      virtualenv [ARGS]
      ```
