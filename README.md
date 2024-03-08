@@ -1,13 +1,17 @@
-# VirtualEnv Bootstrap for Windows
+# Virtualenv Bootstrapper for Windows
 
-This script, `virtualenv.cmd`, is designed for Windows users who need to create Python virtual environments without installing Python globally on their system. It acts as a shim to bootstrap an underlying Python binary, allowing you to specify the Python version and set up a virtual environment with ease.
+This script, `virtualenv.cmd`, is designed for Windows users who need to create Python virtual environments without installing Python globally on their system. It acts as a shim to bootstrap an underlying Python binary, allowing you to specify the Python version and set up a virtual environment with ease. You can even access the script directly from your terminal.
 
 # Quick usage
-Navigate in _Cmd_ to a location where you want to create a venv directory, and run:
+Navigate in _Cmd_ to a location where you want to create a `venv` directory, and run:
 
-    powershell -nop -c "Invoke-WebRequest -Uri 'https://github.com/heetbeet/virtualenv-bootstap/raw/main/virtualenv.cmd' -OutFile $env:Temp/virtualenv.cmd; & $env:Temp/virtualenv.cmd venv"
+    powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd) $env:temp/.cmd venv
+
+To run any `virtualenv` command, just replace the argument `venv` with arguments of your choice, e.g. `--help`
+
+    powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd) $env:temp/.cmd --help
+
 <br>
-
 
 ## Features
 
@@ -19,7 +23,7 @@ Navigate in _Cmd_ to a location where you want to create a venv directory, and r
 
 1. **Download the Script:** Download `virtualenv.cmd` to your project directory or a known location on your system.
 
-2. **Make Accessible Everywhere:** Optionally, add the script's directory to your system's PATH by running add-directory-to-user-path.cmd. This lets you use virtualenv.cmd from any command prompt without navigating to its folder.
+2. **Make Accessible Everywhere:** Optionally, add the script's directory to your system's PATH by running `add-directory-to-user-path.cmd`. This lets you use `virtualenv.cmd` from any command prompt without navigating to its folder.
 
 3. **Open Command Prompt:** Navigate to the directory where you've placed `virtualenv.cmd` if it's not in your PATH.
 
