@@ -4,34 +4,39 @@ A thin stand-alone layer to execute [virtualenv](https://virtualenv.pypa.io/en/l
 
 The script, `virtualenv.cmd`, acts as a shim to bootstrap [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) in order to set up Python virtual environments with any specified Python version, without installing Python directly on your system. You can download `virtualenv.cmd`, you can install `virtualenv.cmd`, or you can even execute `virtualenv.cmd` directly from github.com in your terminal.
 
-# Installation
+## Install virtualenv.cmd
+The easiest way to start using `virtualenv.cmd` is to run the setup script directly from github.com. Open _cmd_ and run the following command:
+
+    powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/extras/install-from-github.cmd -outfile $env:temp/.cmd) $env:temp/.cmd
+
+![image](https://github.com/heetbeet/virtualenv-bootstrap/assets/4103775/1ad3be85-3458-40af-95b3-fad900cd6a0f)
 
 
-# One-time use
-You can directly execute `virtualenv` from github.com. To create a `venv` directory, just open _cmd_, navigate to a location where you want the `venv` directory, and run:
+## Or run directly from github.com
+You can directly execute `virtualenv.cmd` from github.com. For example to create a new `venv` directory, just open _cmd_, navigate to the location where you want the `venv`, and run:
 
     powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd) $env:temp/.cmd venv
 
-Furthermore, to run any `virtualenv` command, just replace the argument `venv` with arguments of your choice, e.g. `--help`
+Furthermore, to run any `virtualenv.cmd` command, just replace `venv` with the arguments of your choice, e.g. `--help`
 
     powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/virtualenv.cmd -outfile $env:temp/.cmd) $env:temp/.cmd --help
 
 <br>
 
-## Features
+## Added Features
 
-- **Python Version Specification:** Allows specifying a Python version (3.x.x format) to bootstrap the virtual environment with that specific Python version.
+- **Python Version Specification:** `virtualenv.cmd` added an extra argument to [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) in order to specify a Python version for your virtual environment.
 - **No Global Python Installation Required:** Enables the creation of Python virtual environments on Windows machines without the need for a globally installed Python.
 - **Automatic Python Download:** Downloads the specified or default Python version automatically from the official Python repository.
 
 ## Usage
 
 4. **Running virtualenv:**
-   - To create a virtual environment with the default Python version, simply run virtualenv with regular arguments (see :
+   - To create a virtual environment with the default Python version, simply run virtualenv with regular arguments (see [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html)):
      ```
      virtualenv [ARGS]
      ```
-   - To specify a Python version (e.g., 3.8.10), use the version as the first argument:
+   - To specify a Python version (e.g., 3.8.10), use a version tuple as the first argument to `virtualenv.cmd`:
      ```
      virtualenv 3.8.10 [ARGS]
      ```
@@ -40,10 +45,11 @@ Furthermore, to run any `virtualenv` command, just replace the argument `venv` w
 
 When `virtualenv.cmd` is executed, it:
 - Checks if the first argument matches a Python version pattern (3.x.x).
-- Downloads the specified (or default) Python version's embedded package from the official Python repository.
-- Extracts the package to a temporary directory.
-- Installs `pip` and `virtualenv`.
-- Creates a virtual environment in the current directory or a specified path.
+- Checks if the required version is not already in cache, otherwise:
+    - Downloads the specified Python version from the the official Python repository.
+    - Extracts the package to a temporary directory.
+    - Installs `pip` and `virtualenv`.
+- Runs virtualenv.cmd with your provided [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) arguments.
 
 ## License
 
