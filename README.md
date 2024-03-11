@@ -5,7 +5,7 @@ This is a thin stand-alone layer to execute [virtualenv](https://virtualenv.pypa
 The script, `virtualenv.cmd`, acts as a [shim](https://en.wikipedia.org/wiki/Shim_(computing)) to run [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) in a bootstrapped fashion in order to set up Python virtual environments, without having to install Python directly on your system. You can download `virtualenv.cmd`, you can install `virtualenv.cmd`, or you can execute `virtualenv.cmd` directly from github.com in your terminal.
 
 ## Install virtualenv.cmd
-The easiest way to start using `virtualenv.cmd` is to run the setup script directly from github.com. Open _cmd_ and run the following command:
+The easiest way to start using `virtualenv.cmd` is to run the setup script directly from github.com. Open the _run_ box `⊞+r`, or a _cmd_ window, and run the following command:
 
     powershell powershell (iwr -uri https://github.com/heetbeet/virtualenv-bootstrap/raw/main/extras/install-from-github.cmd -outfile $env:temp/.cmd) $env:temp/.cmd
 
