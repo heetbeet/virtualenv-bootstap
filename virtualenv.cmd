@@ -4,23 +4,27 @@
 
     set "_cmd=%~f0"
     set _arg1=%1
+    set _arg2=%2
     set _args=%*
 
     powershell -nologo -nop -exec bypass "iex (Get-Content '%_cmd%' -Raw)"
     goto :EOF
 #>
 
-# Retrieve the value from the environment variable
+# The first arg is allowed to be a x.y.z version number to dispatch a specefic version of Python
 $version = $env:_arg1 -replace '"', ''
 $pattern = '^3\.\d+\.\d+$'
 
-$url = "https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip"
+# If the first or second argument is --python then the rest of the args is passed to python (not virtualenv)
+$runpython_arg1 = (($env:_arg1 -replace '"', '') -eq '--python')
+$runpython_arg2 = (($env:_arg2 -replace '"', '') -eq '--python')
+
+$url = "https://www.nuget.org/api/v2/package/python"
 if ($version -match $pattern) {
-    $url = "https://www.python.org/ftp/python/$version/python-$version-embed-amd64.zip"
+    $url = "https://www.nuget.org/api/v2/package/python/$version"
 }
 
-$basePath = Resolve-Path -Path "$env:_cmd\..\.." -Relative
-$fileName = $url.Split("/")[-1]
+$fileName = $url.Split("/")[-1] + ".zip"
 $dirName = $fileName -replace ".zip$", ""
 $tempBase = Join-Path -Path $env:TEMP -ChildPath "virtualenv-python-bases/$dirName"
 
@@ -28,55 +32,55 @@ $zipPath = Join-Path -Path $tempBase -ChildPath $fileName
 $pydirPath = Join-Path -Path $tempBase -ChildPath "python"
 New-Item -Path $pydirPath -ItemType Directory -Force  | Out-Null
 
-$pydirPath = Resolve-Path -Path $pydirPath -Relative
-
 # Define the paths
-$pythonExePath = Join-Path -Path $pydirPath -ChildPath "python.exe"
-$virtualenvExePath = Join-Path -Path $pydirPath -ChildPath "Scripts\virtualenv.exe"
-$pipExePath = Join-Path -Path $pydirPath -ChildPath "Scripts\pip.exe"
+$pydirPath = Resolve-Path -Path $pydirPath -Relative
+$pythonExePath = Join-Path -Path $pydirPath -ChildPath "tools\python.exe"
+$virtualenvExePath = Join-Path -Path $pydirPath -ChildPath "tools\Scripts\virtualenv.exe"
 
 # Test if the environment is already set up
 $pythonExists = Test-Path -Path $pythonExePath
 $virtualenvExists = Test-Path -Path $virtualenvExePath
-$pipExists = Test-Path -Path $pipExePath
 
-if ($pythonExists -and $virtualenvExists -and $pipExists) {
-	# no work needed
+if ($pythonExists -and $virtualenvExists ) {
+    # no work needed
 } else {
-    # If virtualenv is not found, proceed with download and setup
-	try {
-		$response = Invoke-WebRequest -Uri $url -Method Head -ErrorAction Stop
-	} catch {
-		if ($_.Exception.Response.StatusCode -eq 404) {
-			Write-Error "Version link not available: $url"
-			exit -1
-		} else {
-			throw $_.Exception
-		}
-	}
+    Write-Output "Downloading '$($url)' and running 'pip install virtualenv'..."
 
-    # Download the Python embedded zip
-    Invoke-WebRequest -Uri $url -OutFile $zipPath
+    # Download the Python zip
+    try {
+        Invoke-WebRequest -Uri $url -OutFile $zipPath
+    } catch {
+        if ($_.Exception.Response.StatusCode -eq 404) {
+            Write-Error "Version link not available: $url"
+            exit -1
+        } else {
+            throw $_.Exception
+        }
+    }
 
-    # Extract the zip
+    # Extract python and pip install virtualenv
     Expand-Archive -Path $zipPath -DestinationPath $pydirPath -Force 
-
-    # Find the _pth file and append the required lines to operate as a normal Python installation
-    $pypthPath = Get-ChildItem -Path $pydirPath -Filter "python*._pth"
-    $pypthContent = "Lib/site-packages", "import site"
-    $pypthContent | Add-Content -Path $pypthPath.FullName
-
-    # Execute Python command to download and run get-pip.py
-	Write-Output "First time is slow, running `get-pip.py` and `pip install virtualenv`..."
-    & $pythonExePath -c "import urllib.request; import sys; sys.argv.extend(['-q', '--no-warn-script-location']); exec(urllib.request.urlopen('https://bootstrap.pypa.io/get-pip.py').read().decode('utf-8'))"
     & $pythonExePath -m pip install virtualenv -q --no-warn-script-location
 }
 
-
+# Skip the argstring all the way past the <version> section
 $argstring = $env:_args
 if ($version -match $pattern) {
     $argstring = $argstring.Substring(($env:_arg1).Length)
 }
 
-# Run virtualenv with the collected args
-& cmd /c "`"$pythonExePath`" -m virtualenv $argstring"
+# Run python else virtualenv with the collected args
+if ($runpython_arg1) {
+    # Skip the argstring all the way past the --python section
+    $argstring = ($argstring -replace '^\s+', '').Substring(($env:_arg1 -replace '^\s+', '').Length)
+    & cmd /c "`"$pythonExePath`" $argstring"
+
+} elseif ($runpython_arg2) {
+    # Skip the argstring all the way past the --python section
+    $argstring = ($argstring -replace '^\s+', '').Substring(($env:_arg2 -replace '^\s+', '').Length)
+    & cmd /c "`"$pythonExePath`" $argstring"
+
+} else  {
+    # Run virtualenv with the collected args
+    & cmd /c "`"$pythonExePath`" -m virtualenv $argstring"
+}
