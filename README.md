@@ -29,21 +29,28 @@ You can have a project with very complex build logic implemented in Python, that
 
 ## Features
 
-- **Python Version Specification:** `virtualenv.cmd` added an extra argument to [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) in order to specify a Python version for your virtual environment.
-- **No Global Python Installation Required:** Enables the creation of Python virtual environments on Windows machines without the need for a globally installed Python.
-- **Automatic Python Download:** Downloads the specified or default Python version automatically from the official Python repository.
+- **Python Version Specification:** `virtualenv.cmd` added an optional first argument to [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html) with pattern 3.x.x to specify the Python version for your virtual environment.
+- **No Global Python Installation Required:** Create virtual environments on-the-fly without the need for a pre-installed Python.
+- **Run Python Directly:** `virtualenv.cmd` added an argument `--python` to pass arguments directly to the underlying `python.exe`.
 
 ## Usage
 
-4. **Running virtualenv:**
+- **Running virtualenv:**
    - To create a virtual environment with the default Python version, simply run `virtualenv.cmd` with regular arguments (see [virtualenv](https://virtualenv.pypa.io/en/latest/user_guide.html)):
      ```
      virtualenv [ARGS]
      ```
-   - To specify a Python version (e.g., 3.8.10), use a version tuple as the first argument to `virtualenv.cmd`:
+   - To specify a Python version (e.g., `3.8.10`), use a version tuple as the first argument to `virtualenv.cmd`:
      ```
      virtualenv 3.8.10 [ARGS]
      ```
+
+- **Running python:**
+   - To run the underlying Python directly, use the `--python` flag. For example running `file.py` under Python 3.8.10:
+     ```
+     virtualenv 3.8.10 --python file.py
+     ```
+
 
 ## How It Works
 
