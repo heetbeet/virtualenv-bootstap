@@ -35,7 +35,7 @@ New-Item -Path $pydirPath -ItemType Directory -Force  | Out-Null
 # Define the paths
 $pydirPath = Resolve-Path -Path $pydirPath -Relative
 $pythonExePath = Join-Path -Path $pydirPath -ChildPath "tools\python.exe"
-$virtualenvExePath = Join-Path -Path $pydirPath -ChildPath "tools\Scripts\virtualenv.exe"
+$virtualenvExePath = Join-Path -Path $pydirPath -ChildPath "Scripts\virtualenv.exe"
 
 # Test if the environment is already set up
 $pythonExists = Test-Path -Path $pythonExePath
@@ -60,6 +60,13 @@ if ($pythonExists -and $virtualenvExists ) {
 
     # Extract python and pip install virtualenv
     Expand-Archive -Path $zipPath -DestinationPath $pydirPath -Force 
+
+    # Create pyvenv.cfg and let that Python install to pyvenv.cfg's site-packages
+    Set-Content "$pydirPath\pyvenv.cfg" -Value "include-system-site-packages = false"
+    mkdir "$pydirPath\Lib" -ErrorAction Ignore
+    Move-Item "$pydirPath\tools\Lib\site-packages" "$pydirPath\Lib" -Force
+
+    # Install venv
     & $pythonExePath -m pip install virtualenv -q --no-warn-script-location
 }
 
